@@ -2,6 +2,7 @@
 
 import pygame
 from src.common import getSetting
+from src.style import style
 
 class Item():
     def __init__(self, settings):
@@ -13,7 +14,7 @@ class Item():
 
     def draw(self, screen):
         pygame.draw.circle(screen,
-                         (64, 64, 128),
-                         (self.x * self.cellSize + self.cellSize2
-                         ,self.y * self.cellSize + self.cellSize2)
-                         ,self.cellSize2)
+                           style.ItemColor,
+                           (self.x * self.cellSize + self.cellSize2
+                           ,self.y * self.cellSize + self.cellSize2)
+                           ,self.cellSize2)

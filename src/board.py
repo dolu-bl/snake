@@ -5,6 +5,7 @@ import random
 from src.common import getSetting, Direction
 from src.snake import Snake
 from src.item import Item
+from src.style import style
 
 class Board():
     def __init__(self, settings):
@@ -20,14 +21,14 @@ class Board():
 
     def draw(self, screen):
         self.move()
-        screen.fill((0,0,0))
+        screen.fill(style.BoardFillColor)
         for row in range(0, self.boardWidth):
             for column in range(0, self.boardHeight):
                 x = row * self.cellSize
                 y = column * self.cellSize
-                color = (64, 64, 64)
+                color = style.BoardFloorColor
                 if self.isDead:
-                    color = (128, 32, 32)
+                    color = style.BoardDeadColor
                 pygame.draw.rect(screen,
                                  color,
                                  (x, y, self.cellSize, self.cellSize),
