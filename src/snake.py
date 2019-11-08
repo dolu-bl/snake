@@ -17,12 +17,14 @@ class Snake():
 
     def draw(self, screen):
         for pos in self.body:
-            pygame.draw.rect(screen,
-                         style.SnakeTailColor,
-                         (pos[0] * self.cellSize
-                         ,pos[1] * self.cellSize
-                         ,self.cellSize
-                         ,self.cellSize))
+            pygame.draw.rect(
+                screen,
+                style.SnakeTailColor,
+                (pos[0] * self.cellSize
+                ,pos[1] * self.cellSize
+                ,self.cellSize
+                ,self.cellSize)
+                )
 
     def setDirection(self, direction):
         if direction == None:
