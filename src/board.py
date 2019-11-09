@@ -47,13 +47,14 @@ class Board():
             self.tryMove(self.snake.x - 1, self.snake.y)
 
     def tryMove(self, x, y):
-        self.isDead = ((x < 0) or
-                       (x >= self.boardWidth) or
-                       (y < 0) or
-                       (y >= self.boardHeight) or
-                       self.snake.isContains(x, y))
+        self.isDead = self.snake.isContains(x, y)
         if self.isDead:
             return
+
+        if x < 0 : x = self.boardWidth - 1;
+        if y < 0 : y = self.boardHeight - 1;
+        if x >= self.boardWidth : x = 0
+        if y >= self.boardHeight : y = 0
 
         isItemEaten = (x == self.item.x) and (y == self.item.y)
         if isItemEaten:
