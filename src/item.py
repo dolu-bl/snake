@@ -18,3 +18,9 @@ class Item():
                            (self.x * self.cellSize + self.cellSize2
                            ,self.y * self.cellSize + self.cellSize2)
                            ,self.cellSize2)
+
+    def isEaten(self, x, y):
+        result = (x == self.x) and (y == self.y)
+        if result:
+            self.eatenUpCount = self.eatenUpCount + 1
+        return result

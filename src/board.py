@@ -56,9 +56,8 @@ class Board():
         if x >= self.boardWidth : x = 0
         if y >= self.boardHeight : y = 0
 
-        isItemEaten = (x == self.item.x) and (y == self.item.y)
+        isItemEaten = self.item.isEaten(x, y)
         if isItemEaten:
-            self.item.eatenUpCount = self.item.eatenUpCount + 1
             self.reinitItem()
 
         self.snake.moveHead(x, y, isItemEaten)
