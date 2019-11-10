@@ -24,6 +24,7 @@ class Game():
     def run(self):
         drawCounter = 0
         newDirection = None
+        isPaused = False
         while self.isRunning:
             self.clock.tick(self.fps)
             drawCounter = drawCounter + 1
@@ -36,6 +37,11 @@ class Game():
                     elif event.key == pygame.K_RIGHT : newDirection = Direction.Right
                     elif event.key == pygame.K_DOWN : newDirection = Direction.Down
                     elif event.key == pygame.K_LEFT : newDirection = Direction.Left
+                    elif event.key == pygame.K_SPACE : isPaused = not isPaused
+
+            if isPaused:
+                self.pause()
+                continue
 
             if drawCounter < int(self.fps / self.speed):
                 continue
@@ -84,3 +90,15 @@ class Game():
                     escapePressed = True
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     escapePressed = True
+
+    def pause(self):
+        x = self.board.boardWidth * self.board.cellSize / 2
+        y = self.board.boardHeight * self.board.cellSize / 2
+
+        overFont = pygame.font.SysFont('Arial', 60, True)
+        overText = overFont.render('PAUSED', True, (128, 128, 0), (0, 0, 64))
+        overWidth2 = int(overText.get_width() / 2)
+        overHeight2 = int(overText.get_height() / 2)
+        self.screen.blit(overText, (x - overWidth2, y - overHeight2))
+
+        pygame.display.flip()
