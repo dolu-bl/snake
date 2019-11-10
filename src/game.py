@@ -49,7 +49,10 @@ class Game():
             if self.board.isDead:
                 self.isRunning = False
 
+        if self.board.isDead:
+            self.gameover()
         pygame.quit()
+
 
     def printInfo(self):
         pygame.display.set_caption(
@@ -57,3 +60,30 @@ class Game():
             str(self.board.item.eatenUpCount) +
             " speed: " +
             str(self.speed))
+
+    def gameover(self):
+        x = self.board.boardWidth * self.board.cellSize / 2
+        y = self.board.boardHeight * self.board.cellSize / 2
+
+        overFont = pygame.font.SysFont('Arial', 60, True)
+        overText = overFont.render('GAME OVER', True, (128, 128, 0), (64, 0, 0))
+        overWidth2 = int(overText.get_width() / 2)
+        overHeight2 = int(overText.get_height() / 2)
+        self.screen.blit(overText, (x - overWidth2, y - overHeight2))
+
+        moreFont = pygame.font.SysFont('Arial', 12)
+        moreText = moreFont.render('Press Esc to quit', True, (128, 128, 128), (32, 32, 32))
+        moreWidth2 = int(moreText.get_width() / 2)
+        self.screen.blit(moreText, (x - moreWidth2, y + overHeight2))
+
+        pygame.display.flip()
+
+        escapePressed = False
+        while not escapePressed:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    escapePressed = True
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                    escapePressed = True
+
+        pygame.quit()
