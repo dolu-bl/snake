@@ -53,7 +53,6 @@ class Game():
             self.gameover()
         pygame.quit()
 
-
     def printInfo(self):
         pygame.display.set_caption(
             "Snake score: " +
@@ -85,5 +84,3 @@ class Game():
                     escapePressed = True
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     escapePressed = True
-
-        pygame.quit()
